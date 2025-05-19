@@ -4,7 +4,7 @@ HTML/CSS/JS base components
 ## @espirion/core Folder Structure
 
 espirion-core/
-- public/          # Static assets
+| public/          # Static assets
   - index.html     # Main HTML file
   - styles.css     # Global styles
 - README.md        # Project overview
