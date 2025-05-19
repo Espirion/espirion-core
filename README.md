@@ -12,13 +12,8 @@ espirion-core/
   - index.css                             # Main CSS entry (tokens + base + themes)
 
   - components/                           # All Web Components
-    - x-button/
-      - x-button.js                   # Button component (Custom Element logic)
-      - x-button.css                  # Scoped styles (can be inlined in JS too)
-      - index.js                      # Exports + registers the component
-    - x-input/
-      - ...                           # Another component
-    - ...                               # More components (x-modal, x-tabs, etc.)
+    - x-button.js                         # Button component (Custom Element logic)
+    - x-input.js
 
   - tokens/                               # Design Tokens (CSS Variables or JS)
     - colors.css                        # Primary, secondary, neutral, etc.
