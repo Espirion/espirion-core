@@ -14,9 +14,7 @@ export default class EspButton extends HTMLElement {
 
   static #shadowTemplate = html`
     <template>
-      <slot name="icon-left"></slot>
       <slot></slot>
-      <slot name="icon-right"></slot>
     </template>
   `;
 
@@ -57,21 +55,30 @@ export default class EspButton extends HTMLElement {
 
     /* Size Styles */
     :host([size="sm"]) {
-      font-size: var(--esp-font-size-sm, 0.75rem);
+      font-size: var(--esp-font-size-sm);
       padding: var(--esp-button-padding-sm, 0.25rem 0.75rem);
       min-height: 1.75rem;
     }
 
     :host([size="md"]) {
-      font-size: var(--esp-font-size-md, 0.875rem);
+      font-size: var(--esp-font-size-md);
       padding: var(--esp-button-padding-md, 0.5rem 1rem);
       min-height: 2rem;
     }
 
     :host([size="lg"]) {
-      font-size: var(--esp-font-size-lg, 1rem);
+      font-size: var(--esp-font-size-lg);
       padding: var(--esp-button-padding-lg, 0.75rem 1.25rem);
       min-height: 2.5rem;
+    }
+
+    :host([size="sm"]) ::slotted(esp-icon) {
+      width: var(--esp-font-size-sm);
+      height: var(--esp-font-size-sm);
+    }
+    :host([size="lg"]) ::slotted(esp-icon) {
+      width: var(--esp-font-size-lg);
+      height: var(--esp-font-size-lg);
     }
 
     /* Variant + Appearance combinations */
@@ -135,22 +142,6 @@ export default class EspButton extends HTMLElement {
     /* Hover and Focus States */
     :host([variant="link"]:focus-visible) {
       text-decoration: underline;
-    }
-
-    /* Icon Handling */
-    ::slotted([slot="icon-left"]),
-    ::slotted([slot="icon-right"]) {
-      display: inline-flex;
-      width: 1em;
-      height: 1em;
-    }
-
-    ::slotted([slot="icon-left"]) {
-      margin-inline-end: var(--esp-spacing-xs, 0.5rem);
-    }
-
-    ::slotted([slot="icon-right"]) {
-      margin-inline-start: var(--esp-spacing-xs, 0.5rem);
     }
 
     /* Loading Spinner */
@@ -318,7 +309,10 @@ export default class EspButton extends HTMLElement {
       tooltip.disabled === false &&
       this._dismissTooltip === false
     ) {
-      if (this.parentElement && this.parentElement.localName === "esp-buttons") {
+      if (
+        this.parentElement &&
+        this.parentElement.localName === "esp-buttons"
+      ) {
         for (let sibling of this.parentElement.children) {
           if (sibling !== this && sibling.localName === "esp-button") {
             let siblingTooltip = sibling.querySelector(":scope > esp-tooltip");

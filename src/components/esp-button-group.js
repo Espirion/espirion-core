@@ -115,7 +115,6 @@ export default class EspButtonGroup extends HTMLElement {
 
   _updateSizeAttribute() {
     const size = this.size;
-    console.log(size);
     const buttons = this._getButtons();
     buttons.forEach((button) => {
       button.size = size;
