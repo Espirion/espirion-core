@@ -274,11 +274,11 @@ export default class EspButton extends HTMLElement {
     this._syncState();
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
+  attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue || this.isConnected === false) {
       return;
     }
-    if (oldVal !== newVal) {
+    if (oldValue !== newValue) {
       this._syncState();
     }
     if (name === "disabled") {

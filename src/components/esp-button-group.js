@@ -95,22 +95,40 @@ export default class EspButtonGroup extends HTMLElement {
       document.importNode(EspButtonGroup.#shadowTemplate.content, true)
     );
 
+    this._updateSizeAttribute();
+
     this.addEventListener("click", (event) => this._onClick(event), true);
     this.addEventListener("keydown", (event) => this._onKeyDown(event));
   }
 
   connectedCallback() {
     this.setAttribute("role", "group");
-    this._syncState();
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (oldVal !== newVal) {
-      this._syncState();
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue === newValue) {
+      return;
+    } else if (name === "size") {
+      this._updateSizeAttribute();
     }
   }
 
-  _syncState() {}
+  _updateSizeAttribute() {
+    const size = this.size;
+    console.log(size);
+    const buttons = this._getButtons();
+    buttons.forEach((button) => {
+      button.size = size;
+    });
+  }
+
+  _getButtons() {
+    return [
+      ...this.querySelectorAll(
+        ":scope > esp-button, :scope > esp-box > esp-button"
+      ),
+    ];
+  }
 
   _onClick(event) {}
   _onKeyDown(event) {}
