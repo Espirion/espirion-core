@@ -247,6 +247,7 @@ export default class EspButton extends HTMLElement {
   }
 
   _root = null;
+  _dismissTooltip = false;
   _lastTabIndex = 0;
 
   constructor() {
@@ -309,8 +310,37 @@ export default class EspButton extends HTMLElement {
   }
 
   _onPointerDown(event) {}
-  _onPointerEnter() {}
-  _onPointerLeave() {}
+  _onPointerEnter() {
+    let tooltip = this.querySelector(":scope > esp-tooltip");
+
+    if (
+      tooltip &&
+      tooltip.disabled === false &&
+      this._dismissTooltip === false
+    ) {
+      if (this.parentElement && this.parentElement.localName === "esp-buttons") {
+        for (let sibling of this.parentElement.children) {
+          if (sibling !== this && sibling.localName === "esp-button") {
+            let siblingTooltip = sibling.querySelector(":scope > esp-tooltip");
+
+            if (siblingTooltip) {
+              siblingTooltip.close(false);
+            }
+          }
+        }
+      }
+      tooltip.open(this);
+    }
+  }
+  _onPointerLeave() {
+    let tooltip = this.querySelector(":scope > esp-tooltip");
+
+    if (tooltip) {
+      tooltip.close();
+    }
+
+    this._dismissTooltip = false;
+  }
   _onClick(event) {}
   _onKeyDown(event) {}
   _onClose(event) {}
