@@ -66,4 +66,6 @@ body {
   font-size: var(--esp-font-size-base);
   font-weight: var(--esp-font-weight-semibold);
   line-height: var(--esp-line-height-base);
+  margin: 0px;
+  padding: 15px;
 }
