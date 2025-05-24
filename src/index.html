@@ -1,49 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="index.js"></script>
-  </head>
-  <body>
-    <h1>Espirion Design System</h1>
-    <h2>Buttons</h2>
+<html lang="en" data-theme="github-dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="index.js"></script>
+</head>
+
+<body>
+  <h1>Espirion Design System</h1>
+
+  <h2>Buttons</h2>
+  <esp-button variant="default">
+    Button
+    <esp-tooltip>Button</esp-tooltip>
+  </esp-button>
+  <esp-button variant="default" disabled>Button</esp-button>
+  <esp-button variant="default" appearance="outlined">Button<esp-tooltip
+      position="right">Button</esp-tooltip></esp-button>
+  <esp-button variant="default" appearance="outlined" disabled>Button<esp-tooltip
+      position="right">Button</esp-tooltip></esp-button>
+  <esp-button variant="primary">Button</esp-button>
+  <esp-button variant="primary" disabled>Button</esp-button>
+  <esp-button variant="primary" appearance="outlined">Button</esp-button>
+  <esp-button variant="primary" appearance="outlined" disabled>Button</esp-button>
+  <esp-button variant="danger">Button</esp-button>
+  <esp-button variant="danger" disabled>Button</esp-button>
+  <esp-button variant="danger" appearance="outlined">Button</esp-button>
+  <esp-button variant="danger" appearance="outlined" disabled>Button</esp-button>
+  <esp-button variant="link">Button <esp-tooltip position="bottom">Button</esp-tooltip></esp-button>
+  <esp-button variant="link" disabled>Button</esp-button>
+  <esp-button variant="default" class="p-2" appearance="outlined" id="theme-toggle">
+    <esp-icon name="moon"></esp-icon>
+    <!-- <esp-icon name="moon"></esp-icon> -->
+  </esp-button>
+
+  <h2>Buttons Group</h2>
+  <esp-button-group orientation="horizontal" size="lg">
     <esp-button variant="default">Button</esp-button>
-    <esp-button variant="default" disabled>Button</esp-button>
-    <esp-button variant="default" appearance="outlined">Button</esp-button>
-    <esp-button variant="default" appearance="outlined" disabled
-      >Button</esp-button
-    >
+    <esp-button variant="default">Button</esp-button>
+  </esp-button-group>
+  <esp-button-group orientation="horizontal">
+    <esp-button variant="default">Button</esp-button>
     <esp-button variant="primary">Button</esp-button>
-    <esp-button variant="primary" disabled>Button</esp-button>
-    <esp-button variant="primary" appearance="outlined">Button</esp-button>
-    <esp-button variant="primary" appearance="outlined" disabled
-      >Button</esp-button
-    >
     <esp-button variant="danger">Button</esp-button>
-    <esp-button variant="danger" disabled>Button</esp-button>
-    <esp-button variant="danger" appearance="outlined">Button</esp-button>
-    <esp-button variant="danger" appearance="outlined" disabled
-      >Button</esp-button
-    >
-    <esp-button variant="link">Button</esp-button>
-    <esp-button variant="link" disabled>Button</esp-button>
-    <h2>Buttons Group</h2>
-    <esp-button-group orientation="horizontal" size="lg">
-      <esp-button variant="default">Button</esp-button>
-      <esp-button variant="default">Button</esp-button>
-    </esp-button-group>
-    <esp-button-group orientation="horizontal">
-      <esp-button variant="default">Button</esp-button>
-      <esp-button variant="primary">Button</esp-button>
-      <esp-button variant="danger">Button</esp-button>
-    </esp-button-group>
-    <esp-button-group orientation="vertical" size="lg" class="my-0">
-      <esp-button>Button</esp-button>
-      <esp-button>Button</esp-button>
-      <esp-button>Button</esp-button>
-    </esp-button-group>
-  </body>
+  </esp-button-group>
+  <esp-button-group orientation="vertical" size="lg" class="my-0">
+    <esp-button>Button</esp-button>
+    <esp-button>Button</esp-button>
+    <esp-button>Button</esp-button>
+  </esp-button-group>
+
+  <h2>Theme Toggle Button</h2>
+  <esp-theme-toggle></esp-theme-toggle>
+
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const toggleButtonIcon = toggleButton.querySelector("esp-icon");
+    toggleButton.addEventListener("toggle", (event) => {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'github-dark';
+
+      root.setAttribute('data-theme', isDark ? 'github-light' : 'github-dark');
+      toggleButtonIcon.setAttribute('name', isDark ? 'sun' : 'moon');
+    });
+  </script>
+</body>
+
 </html>

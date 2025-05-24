@@ -101,7 +101,7 @@ export default class EspButton extends HTMLElement {
     :host([variant="primary"][appearance="filled"]),
     :host([variant="primary"]:not([appearance])) {
       background-color: var(--esp-color-primary);
-      color: var(--esp-color-text-primary);
+      color: var(--esp-color-text-secondary);
       border: 1px solid transparent;
     }
 
@@ -115,7 +115,7 @@ export default class EspButton extends HTMLElement {
     :host([variant="danger"][appearance="filled"]),
     :host([variant="danger"]:not([appearance])) {
       background-color: var(--esp-color-error);
-      color: var(--esp-color-text-primary);
+      color: var(--esp-color-text-secondary);
       border: 1px solid transparent;
     }
 
@@ -335,7 +335,16 @@ export default class EspButton extends HTMLElement {
 
     this._dismissTooltip = false;
   }
-  _onClick(event) {}
+  _onClick(event) {
+    // Toggle the button
+    if (event.defaultPrevented === false) {
+      this.removeAttribute("pressed");
+      this.toggled = !this.toggled;
+      this.dispatchEvent(
+        new CustomEvent("toggle")
+      );
+    }
+  }
   _onKeyDown(event) {}
   _onClose(event) {}
 }
