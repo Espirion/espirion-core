@@ -38,10 +38,11 @@ export default class EspButton extends HTMLElement {
       box-sizing: border-box;
       outline: none;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
 
       /* --- DEFAULT SIZE: MEDIUM --- */
       padding: var(--esp-spacing-sm) var(--esp-spacing-md);
-      font-size: var(--esp-font-size-base);
+      font-size: var(--esp-font-size-lg);
 
       /* --- DEFAULT VARIANT (PRIMARY) --- */
       background-color: var(--esp-color-primary);
@@ -70,8 +71,8 @@ export default class EspButton extends HTMLElement {
     /* Hover and Focus States for the default (primary) variant */
     :host(:hover:not([disabled]):not([loading])),
     :host(:focus-visible:not([disabled]):not([loading])) {
-      background-color: var(--esp-color-primary-dark);
-      border-color: var(--esp-color-primary-dark);
+      background-color: var(--esp-color-primary-hover);
+      border-color: var(--esp-color-primary-hover);
     }
 
     /* --- SECONDARY VARIANT --- */
@@ -83,8 +84,8 @@ export default class EspButton extends HTMLElement {
 
     :host([variant="secondary"]:hover:not([disabled]):not([loading])),
     :host([variant="secondary"]:focus-visible:not([disabled]):not([loading])) {
-      background-color: var(--esp-color-secondary-dark);
-      border-color: var(--esp-color-secondary-dark);
+      background-color: var(--esp-color-secondary-hover);
+      border-color: var(--esp-color-secondary-hover);
     }
 
     /* --- Error VARIANT --- */
@@ -96,8 +97,8 @@ export default class EspButton extends HTMLElement {
 
     :host([variant="error"]:hover:not([disabled]):not([loading])),
     :host([variant="error"]:focus-visible:not([disabled]):not([loading])) {
-      background-color: var(--esp-color-error-dark);
-      border-color: var(--esp-color-error-dark);
+      background-color: var(--esp-color-error-hover);
+      border-color: var(--esp-color-error-hover);
     }
 
     /* --- OUTLINE VARIANT --- */
@@ -116,7 +117,7 @@ export default class EspButton extends HTMLElement {
     /* --- INVISIBLE VARIANT --- */
     :host([variant="invisible"]) {
       background-color: transparent;
-      color: var(--esp-color-text);
+      color: var(--esp-color-primary);
       border-color: transparent;
     }
 
@@ -158,7 +159,7 @@ export default class EspButton extends HTMLElement {
     /* Disabled state for the invisible variant */
     :host([variant="invisible"][disabled]) {
       background-color: transparent;
-      color: var(--esp-color-text);
+      color: var(--esp-color-primary);
       border-color: transparent;
       opacity: 0.4;
     }
@@ -213,8 +214,8 @@ export default class EspButton extends HTMLElement {
       z-index: 1;
     }
 
-    :host([variant="outline"]) .ripple,
-    :host([variant="invisible"]) .ripple {
+    /* Adjust ripple color for dark themes */
+    :host-context(body[data-theme="dark"]) .ripple {
       background-color: var(--esp-color-ripple-on-light);
     }
 

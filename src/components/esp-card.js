@@ -22,6 +22,7 @@ export default class EspCard extends HTMLElement {
       box-sizing: border-box;
       overflow: hidden;
       transition: var(--esp-transition-ease);
+      user-select: none;
     }
 
     /* Slot Styles */
@@ -114,8 +115,10 @@ export default class EspCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#applyClickableAccessibility();
+    this._applyClickableAccessibility();
   }
+
+  disconnectedCallback() {}
 
   get variant() {
     return this.getAttribute("variant") || "default";
@@ -159,11 +162,11 @@ export default class EspCard extends HTMLElement {
     if (oldValue === newValue) return;
 
     if (name === "clickable") {
-      this.#applyClickableAccessibility();
+      this._applyClickableAccessibility();
     }
   }
 
-  #applyClickableAccessibility() {
+  _applyClickableAccessibility() {
     if (this.clickable) {
       if (!this.hasAttribute("tabindex")) {
         this.setAttribute("tabindex", "0");

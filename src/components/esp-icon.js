@@ -17,8 +17,9 @@ export default class EspIcon extends HTMLElement {
     /* Styles for the SVG itself */
     svg {
       display: block; /* Remove extra space below SVG */
-      width: 1em; /* Default size relative to font-size */
-      height: 1em;
+      width: 100%;
+      height: 100%;
+      overflow: inherit;
     }
 
     /* --- SIZING (using em for scalability) --- */
@@ -45,6 +46,13 @@ export default class EspIcon extends HTMLElement {
     :host([style*="--icon-color"]) svg {
       fill: var(--icon-color);
       stroke: var(--icon-color); /* Apply to stroke as well if needed */
+    }
+
+    :host([disabled]) {
+      opacity: 0.5;
+    }
+    :host([hidden]) {
+      display: none;
     }
   `;
 
@@ -126,7 +134,6 @@ export default class EspIcon extends HTMLElement {
 
   async #updateIcon() {
     const iconName = this.name;
-    console.log(`Updating icon: ${iconName}`);
     if (!iconName) {
       this.shadowRoot.innerHTML = "";
       this.style.visibility = "visible"; // Show empty space if no icon

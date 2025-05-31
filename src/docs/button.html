@@ -4,16 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EspButton & EspCard Component Showcase</title>
-    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@espirion/espirion-themes@1.0.3/dist/espirion-themes.css"
+    />
     <style>
       body {
         display: flex;
         flex-direction: column;
         gap: var(--esp-spacing-md);
       }
+
+      section {
+        background-color: var(--esp-color-surface);
+        /* Example of section background */
+        border: 1px solid var(--esp-color-border);
+        padding: var(--esp-spacing-md);
+        border-radius: var(--esp-border-radius-lg);
+        display: flex;
+        gap: var(--esp-spacing-sm);
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: var(--esp-shadow-md);
+      }
+
+      section h2 {
+        width: 100%;
+        margin-top: 0;
+        color: var(--esp-color-text);
+        font-size: 1.2rem;
+        border-bottom: 1px dashed var(--esp-color-border);
+        padding-bottom: var(--esp-spacing-sm);
+        margin-bottom: var(--esp-spacing-md);
+      }
+
+      section h3 {
+        /* Added for sub-headings in showcase */
+        margin-top: 0;
+        color: var(--esp-color-text);
+        font-size: 1.1rem;
+        margin-bottom: var(--esp-spacing-sm);
+      }
+
+      .border-bottom {
+        border-bottom: 1px solid var(--esp-color-border);
+      }
+
+      .border-bottom-dashed {
+        border-bottom: 1px dashed var(--esp-color-border);
+      }
+
+      esp-card {
+        .section-header {
+          color: var(--esp-color-text);
+          padding-right: 0px;
+          padding-left: 0px;
+          margin-right: var(--esp-spacing-md);
+          margin-left: var(--esp-spacing-md);
+        }
+      }
     </style>
   </head>
-  <body data-theme="dark">
+  <body data-theme="github-light">
     <h1 class="text-align-center">EspButton Component Showcase</h1>
 
     <esp-card shape="rounded" variant="outline">
@@ -113,6 +165,7 @@
 
     <section>
       <h2>Icon-Only Buttons (with Shapes)</h2>
+
       <h3>Default (Square)</h3>
       <esp-button><esp-icon name="edit"></esp-icon></esp-button>
       <esp-button variant="outline"
