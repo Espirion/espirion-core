@@ -1,133 +1,151 @@
-import Espirion from "../classes/espirion.js";
-
-import { iconMap } from "../utils/icon.js";
-import { html, css } from "../utils/template.js";
+// src/components/esp-icon.js
+import { html, css, fetchSvg } from "../utils/template.js";
 
 // @element esp-icon
 export default class EspIcon extends HTMLElement {
-  static observedAttributes = ["name"];
+  static observedAttributes = ["name", "size", "color"];
 
-  static #shadowTemplate = html`
-    <template>
-      <svg
-        id="svg"
-        preserveAspectRatio="none"
-        viewBox="0 0 16 16"
-        width="16"
-        height="16"
-      ></svg>
-    </template>
-  `;
-
+  // Using a direct style sheet for the Shadow DOM
   static #shadowStyleSheet = css`
     :host {
-      display: block;
-      color: currentColor;
-      display: flex;
+      display: inline-flex; /* Use inline-flex to wrap content and allow alignment */
       align-items: center;
       justify-content: center;
-      width: var(--esp-font-size-base);
-      height: var(--esp-font-size-base);
-    }
-    :host([disabled]) {
-      opacity: 0.5;
-    }
-    :host([hidden]) {
-      display: none;
+      line-height: 1; /* Prevent extra space around icon */
     }
 
-    #svg {
-      width: 100%;
-      height: 100%;
-      fill: currentColor;
-      stroke: none;
-      overflow: inherit;
-      /* @bugfix: pointerOverEvent.relatedTarget leaks shadow DOM of <x-icon> */
-      pointer-events: none;
+    /* Styles for the SVG itself */
+    svg {
+      display: block; /* Remove extra space below SVG */
+      width: 1em; /* Default size relative to font-size */
+      height: 1em;
+    }
+
+    /* --- SIZING (using em for scalability) --- */
+    :host([size="small"]) svg {
+      width: 0.8em; /* Example small size */
+      height: 0.8em;
+    }
+    :host([size="medium"]) svg {
+      width: 1em; /* Default */
+      height: 1em;
+    }
+    :host([size="large"]) svg {
+      width: 1.2em; /* Example large size */
+      height: 1.2em;
+    }
+
+    /* Allow direct CSS variable override for size */
+    :host([style*="--icon-size"]) svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
+
+    /* Allow direct CSS variable override for color */
+    :host([style*="--icon-color"]) svg {
+      fill: var(--icon-color);
+      stroke: var(--icon-color); /* Apply to stroke as well if needed */
     }
   `;
 
-  get name() {
-    return this.hasAttribute("name") ? this.getAttribute("name") : "";
-  }
-  set name(name) {
-    this.setAttribute("name", name);
-  }
-  get disabled() {
-    return this.hasAttribute("disabled");
-  }
-  set disabled(disabled) {
-    disabled
-      ? this.setAttribute("disabled", "")
-      : this.removeAttribute("disabled");
-  }
-
-  _root = null;
-  _svg = null;
-  _defaultIconsChangeListener = null;
+  shadowRoot = null;
+  #iconName = "";
 
   constructor() {
     super();
+    this.shadowRoot = this.attachShadow({ mode: "closed" });
+    this.shadowRoot.adoptedStyleSheets = [EspIcon.#shadowStyleSheet];
 
-    this._root = this.attachShadow({ mode: "closed" });
-    this._root.adoptedStyleSheets = [EspIcon.#shadowStyleSheet];
-    this._root.append(
-      document.importNode(EspIcon.#shadowTemplate.content, true)
-    );
+    // Initially hide the content until SVG is loaded to prevent FOUC
+    this.style.visibility = "hidden";
+  }
 
-    this._svg = this._root.querySelector("#svg");
-
-    for (let element of this._root.querySelectorAll("[id]")) {
-      this["#" + element.id] = element;
+  // Getter/Setter for 'name' attribute
+  get name() {
+    return this.getAttribute("name");
+  }
+  set name(value) {
+    if (value) {
+      this.setAttribute("name", value);
+    } else {
+      this.removeAttribute("name");
     }
-
-    this.addEventListener("pointerenter", () => this._onPointerEnter());
-    this.addEventListener("pointerleave", () => this._onPointerLeave());
   }
 
-  connectedCallback() {
-    Espirion.addEventListener(
-      "iconschange",
-      (this._defaultIconsChangeListener = () => {
-        this._update();
-      })
-    );
+  // Getter/Setter for 'size' attribute
+  get size() {
+    return this.getAttribute("size");
+  }
+  set size(value) {
+    if (value) {
+      this.setAttribute("size", value);
+    } else {
+      this.removeAttribute("size");
+    }
   }
 
-  disconnectedCallback() {
-    Espirion.removeEventListener(
-      "iconschange",
-      this._defaultIconsChangeListener
-    );
+  // Getter/Setter for 'color' attribute
+  get color() {
+    return this.getAttribute("color");
+  }
+  set color(value) {
+    if (value) {
+      // Set as inline style or CSS variable for dynamic coloring
+      this.style.setProperty("--icon-color", value);
+    } else {
+      this.style.removeProperty("--icon-color");
+    }
+  }
+
+  async connectedCallback() {
+    this.#updateIcon();
+    // Set aria-hidden for decorative icons by default
+    if (!this.hasAttribute("aria-label") && !this.hasAttribute("role")) {
+      this.setAttribute("aria-hidden", "true");
+    }
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue && name === "name") {
-      this._update();
+    if (oldValue === newValue) {
+      return;
+    }
+    if (name === "name") {
+      this.#updateIcon();
+    } else if (name === "size") {
+      // Size is handled by CSS, but can also set inline style variable for custom sizes
+      // If newValue is a direct length (e.g., "24px"), set it as a CSS variable
+      if (newValue && ["small", "medium", "large"].indexOf(newValue) === -1) {
+        this.style.setProperty("--icon-size", newValue);
+      } else {
+        this.style.removeProperty("--icon-size");
+      }
+    } else if (name === "color") {
+      this.color = newValue; // Use the setter to apply the style
     }
   }
 
-  _onPointerEnter() {
-    let tooltip = this.querySelector(":scope > esp-tooltip");
-
-    if (tooltip && tooltip.disabled === false) {
-      tooltip.open(this);
+  async #updateIcon() {
+    const iconName = this.name;
+    console.log(`Updating icon: ${iconName}`);
+    if (!iconName) {
+      this.shadowRoot.innerHTML = "";
+      this.style.visibility = "visible"; // Show empty space if no icon
+      return;
     }
-  }
 
-  _onPointerLeave() {
-    let tooltip = this.querySelector(":scope > esp-tooltip");
-
-    if (tooltip) {
-      tooltip.close();
+    this.style.visibility = "hidden"; // Hide while loading new icon
+    const svgContent = await fetchSvg(iconName);
+    if (svgContent) {
+      // Inject SVG content directly into Shadow DOM
+      this.shadowRoot.innerHTML = svgContent;
+      // Apply size/color to the SVG element (if not handled by CSS already)
+      // The CSS takes care of it via :host styles, but if you want direct control
+      // you might re-fetch the SVG or clone and modify it here.
+      // For now, relies on :host styles affecting the direct child SVG.
+    } else {
+      this.shadowRoot.innerHTML = ""; // Clear if SVG failed to load
     }
-  }
-
-  async _update() {
-    let name = this.name.trim();
-    const iconPath = iconMap[name];
-
-    this._svg.innerHTML = iconPath;
+    this.style.visibility = "visible"; // Show after content is loaded or cleared
   }
 }
 
