@@ -1,72 +1,166 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="github-dark">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EspButton Component Showcase (with Sizes)</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: var(--esp-font-family);
+        padding: var(--esp-spacing-lg);
+        display: flex;
+        flex-direction: column;
+        gap: var(--esp-spacing-md);
+        background-color: var(--esp-color-background);
+      }
+      h1 {
+        color: var(--esp-color-text);
+        margin-bottom: var(--esp-spacing-lg);
+        text-align: center;
+      }
+      section {
+        background-color: var(--esp-color-surface);
+        border: 1px solid var(--esp-color-border);
+        padding: var(--esp-spacing-md);
+        border-radius: var(--esp-border-radius-sm);
+        display: flex;
+        gap: var(--esp-spacing-sm);
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: var(--esp-shadow-sm);
+      }
+      section h2 {
+        width: 100%;
+        margin-top: 0;
+        color: var(--esp-color-text);
+        font-size: 1.2rem;
+        border-bottom: 1px dashed var(--esp-color-border);
+        padding-bottom: var(--esp-spacing-sm);
+        margin-bottom: var(--esp-spacing-md);
+      }
+    </style>
+  </head>
+  <body data-theme="dark">
+    <h1>EspButton Component Showcase (with Sizes)</h1>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="index.js"></script>
-</head>
+    <section>
+      <h2>Button Sizes</h2>
+      <esp-button size="small">Small Button</esp-button>
+      <esp-button>Medium Button (Default)</esp-button>
+      <esp-button size="large">Large Button</esp-button>
+      <esp-button size="small" variant="outline">Small Outline</esp-button>
+      <esp-button variant="outline">Medium Outline</esp-button>
+      <esp-button size="large" variant="outline">Large Outline</esp-button>
+      <esp-button size="small" variant="invisible">Small Invisible</esp-button>
+      <esp-button variant="invisible">Medium Invisible</esp-button>
+      <esp-button size="large" variant="invisible">Large Invisible</esp-button>
+    </section>
 
-<body>
-  <h1>Espirion Design System</h1>
+    <section>
+      <h2>Loading States</h2>
+      <esp-button loading>Loading Primary</esp-button>
+      <esp-button loading variant="secondary">Loading Secondary</esp-button>
+      <esp-button loading variant="danger">Loading Danger</esp-button>
+      <esp-button loading variant="outline">Loading Outline</esp-button>
+      <esp-button loading variant="invisible">Loading Invisible</esp-button>
+      <esp-button loading size="small">Loading Small</esp-button>
+      <esp-button loading size="large">Loading Large</esp-button>
+    </section>
 
-  <h2>Buttons</h2>
-  <esp-button variant="default">
-    Button
-    <esp-tooltip>Button</esp-tooltip>
-  </esp-button>
-  <esp-button variant="default" disabled>Button</esp-button>
-  <esp-button variant="default" appearance="outlined">Button<esp-tooltip
-      position="right">Button</esp-tooltip></esp-button>
-  <esp-button variant="default" appearance="outlined" disabled>Button<esp-tooltip
-      position="right">Button</esp-tooltip></esp-button>
-  <esp-button variant="primary">Button</esp-button>
-  <esp-button variant="primary" disabled>Button</esp-button>
-  <esp-button variant="primary" appearance="outlined">Button</esp-button>
-  <esp-button variant="primary" appearance="outlined" disabled>Button</esp-button>
-  <esp-button variant="danger">Button</esp-button>
-  <esp-button variant="danger" disabled>Button</esp-button>
-  <esp-button variant="danger" appearance="outlined">Button</esp-button>
-  <esp-button variant="danger" appearance="outlined" disabled>Button</esp-button>
-  <esp-button variant="link">Button <esp-tooltip position="bottom">Button</esp-tooltip></esp-button>
-  <esp-button variant="link" disabled>Button</esp-button>
-  <esp-button variant="default" class="p-2" appearance="outlined" id="theme-toggle">
-    <esp-icon name="moon"></esp-icon>
-    <!-- <esp-icon name="moon"></esp-icon> -->
-  </esp-button>
+    <section>
+      <h2>Default Button (now Primary style)</h2>
+      <esp-button>Default Button</esp-button>
+    </section>
 
-  <h2>Buttons Group</h2>
-  <esp-button-group orientation="horizontal" size="lg">
-    <esp-button variant="default">Button</esp-button>
-    <esp-button variant="default">Button</esp-button>
-  </esp-button-group>
-  <esp-button-group orientation="horizontal">
-    <esp-button variant="default">Button</esp-button>
-    <esp-button variant="primary">Button</esp-button>
-    <esp-button variant="danger">Button</esp-button>
-  </esp-button-group>
-  <esp-button-group orientation="vertical" size="lg" class="my-0">
-    <esp-button>Button</esp-button>
-    <esp-button>Button</esp-button>
-    <esp-button>Button</esp-button>
-  </esp-button-group>
+    <section>
+      <h2>Primary Buttons</h2>
+      <esp-button variant="primary">Primary Button</esp-button>
+      <esp-button variant="primary" disabled>Primary Disabled</esp-button>
+      <esp-button variant="primary" type="submit"
+        >Primary Submit (Needs JS)</esp-button
+      >
+    </section>
 
-  <h2>Theme Toggle Button</h2>
-  <esp-theme-toggle></esp-theme-toggle>
+    <section>
+      <h2>Secondary Buttons</h2>
+      <esp-button variant="secondary">Secondary Button</esp-button>
+      <esp-button variant="secondary" disabled>Secondary Disabled</esp-button>
+    </section>
 
-  <script>
-    const toggleButton = document.getElementById('theme-toggle');
-    const toggleButtonIcon = toggleButton.querySelector("esp-icon");
-    toggleButton.addEventListener("toggle", (event) => {
-      const root = document.documentElement;
-      const isDark = root.getAttribute('data-theme') === 'github-dark';
+    <section>
+      <h2>Danger Buttons</h2>
+      <esp-button variant="danger">Danger Button</esp-button>
+      <esp-button variant="danger" disabled>Danger Disabled</esp-button>
+    </section>
 
-      root.setAttribute('data-theme', isDark ? 'github-light' : 'github-dark');
-      toggleButtonIcon.setAttribute('name', isDark ? 'sun' : 'moon');
-    });
-  </script>
-</body>
+    <section>
+      <h2>Outline Buttons</h2>
+      <esp-button variant="outline">Outline Button</esp-button>
+      <esp-button variant="outline" disabled>Outline Disabled</esp-button>
+    </section>
 
+    <section>
+      <h2>Invisible Buttons</h2>
+      <esp-button variant="invisible">Invisible Button</esp-button>
+      <esp-button variant="invisible" disabled>Invisible Disabled</esp-button>
+      <p>Hover over the invisible buttons to see a subtle background.</p>
+    </section>
+
+    <section>
+      <h2>Button with Icon and Text</h2>
+      <esp-button variant="primary">
+        <esp-icon name="plus"></esp-icon> Add Option
+      </esp-button>
+      <esp-button variant="secondary">
+        <esp-icon name="cancel"></esp-icon> Cancel
+      </esp-button>
+      <esp-button variant="danger">
+        <esp-icon name="trash"></esp-icon> Delete
+      </esp-button>
+      <esp-button variant="invisible">
+        <esp-icon name="plus"></esp-icon> Add Option
+      </esp-button>
+      <esp-button variant="outline">
+        <esp-icon name="edit"></esp-icon>
+        Delete
+      </esp-button>
+
+      <p>
+        The `&lt;slot&gt;` in the Shadow DOM allows you to put any content
+        inside the custom element.
+      </p>
+    </section>
+
+    <section>
+      <h2>Icon-Only Buttons</h2>
+      <esp-button>
+        <esp-icon name="info" aria-label="Information"></esp-icon>
+      </esp-button>
+      <esp-button variant="secondary">
+        <esp-icon name="plus"></esp-icon>
+      </esp-button>
+      <esp-button variant="danger">
+        <esp-icon name="trash"></esp-icon>
+      </esp-button>
+      <esp-button variant="outline">
+        <esp-icon name="cancel"></esp-icon>
+      </esp-button>
+      <esp-button variant="invisible">
+        <esp-icon name="edit"></esp-icon>
+      </esp-button>
+      <esp-button size="small">
+        <esp-icon name="moon"></esp-icon>
+      </esp-button>
+      <esp-button size="large">
+        <esp-icon name="sun"></esp-icon>
+      </esp-button>
+      <esp-button>
+        <esp-icon name="edit"></esp-icon>
+      </esp-button>
+    </section>
+
+    <script type="module" src="../src/components/esp-button.js"></script>
+    <script type="module" src="../src/components/esp-icon.js"></script>
+  </body>
 </html>
