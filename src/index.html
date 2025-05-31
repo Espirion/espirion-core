@@ -3,164 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EspButton Component Showcase (with Sizes)</title>
+    <title>EspButton & EspCard Component Showcase</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       body {
-        font-family: var(--esp-font-family);
-        padding: var(--esp-spacing-lg);
         display: flex;
         flex-direction: column;
         gap: var(--esp-spacing-md);
-        background-color: var(--esp-color-background);
       }
-      h1 {
-        color: var(--esp-color-text);
-        margin-bottom: var(--esp-spacing-lg);
-        text-align: center;
-      }
-      section {
-        background-color: var(--esp-color-surface);
-        border: 1px solid var(--esp-color-border);
-        padding: var(--esp-spacing-md);
-        border-radius: var(--esp-border-radius-sm);
-        display: flex;
-        gap: var(--esp-spacing-sm);
-        align-items: center;
-        flex-wrap: wrap;
-        box-shadow: var(--esp-shadow-sm);
-      }
-      section h2 {
+
+      /* Styles for card grids within the section to give them space */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--esp-spacing-md);
         width: 100%;
+      }
+      /* Styling for content *inside* esp-card (optional, for examples) */
+      esp-card h3 {
         margin-top: 0;
+        margin-bottom: var(--esp-spacing-xs);
         color: var(--esp-color-text);
-        font-size: 1.2rem;
-        border-bottom: 1px dashed var(--esp-color-border);
-        padding-bottom: var(--esp-spacing-sm);
-        margin-bottom: var(--esp-spacing-md);
+      }
+      esp-card p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      /* Ensure image in card fits its container */
+      esp-card img {
+        max-width: 100%;
+        height: auto;
+        display: block;
       }
     </style>
   </head>
   <body data-theme="dark">
-    <h1>EspButton Component Showcase (with Sizes)</h1>
+    <h1 class="text-align-center">EspCard Component Showcase</h1>
 
-    <section>
-      <h2>Button Sizes</h2>
-      <esp-button size="small">Small Button</esp-button>
-      <esp-button>Medium Button (Default)</esp-button>
-      <esp-button size="large">Large Button</esp-button>
-      <esp-button size="small" variant="outline">Small Outline</esp-button>
-      <esp-button variant="outline">Medium Outline</esp-button>
-      <esp-button size="large" variant="outline">Large Outline</esp-button>
-      <esp-button size="small" variant="invisible">Small Invisible</esp-button>
-      <esp-button variant="invisible">Medium Invisible</esp-button>
-      <esp-button size="large" variant="invisible">Large Invisible</esp-button>
-    </section>
-
-    <section>
-      <h2>Loading States</h2>
-      <esp-button loading>Loading Primary</esp-button>
-      <esp-button loading variant="secondary">Loading Secondary</esp-button>
-      <esp-button loading variant="danger">Loading Danger</esp-button>
-      <esp-button loading variant="outline">Loading Outline</esp-button>
-      <esp-button loading variant="invisible">Loading Invisible</esp-button>
-      <esp-button loading size="small">Loading Small</esp-button>
-      <esp-button loading size="large">Loading Large</esp-button>
-    </section>
-
-    <section>
-      <h2>Default Button (now Primary style)</h2>
-      <esp-button>Default Button</esp-button>
-    </section>
-
-    <section>
-      <h2>Primary Buttons</h2>
-      <esp-button variant="primary">Primary Button</esp-button>
-      <esp-button variant="primary" disabled>Primary Disabled</esp-button>
-      <esp-button variant="primary" type="submit"
-        >Primary Submit (Needs JS)</esp-button
-      >
-    </section>
-
-    <section>
-      <h2>Secondary Buttons</h2>
-      <esp-button variant="secondary">Secondary Button</esp-button>
-      <esp-button variant="secondary" disabled>Secondary Disabled</esp-button>
-    </section>
-
-    <section>
-      <h2>Danger Buttons</h2>
-      <esp-button variant="danger">Danger Button</esp-button>
-      <esp-button variant="danger" disabled>Danger Disabled</esp-button>
-    </section>
-
-    <section>
-      <h2>Outline Buttons</h2>
-      <esp-button variant="outline">Outline Button</esp-button>
-      <esp-button variant="outline" disabled>Outline Disabled</esp-button>
-    </section>
-
-    <section>
-      <h2>Invisible Buttons</h2>
-      <esp-button variant="invisible">Invisible Button</esp-button>
-      <esp-button variant="invisible" disabled>Invisible Disabled</esp-button>
-      <p>Hover over the invisible buttons to see a subtle background.</p>
-    </section>
-
-    <section>
-      <h2>Button with Icon and Text</h2>
-      <esp-button variant="primary">
-        <esp-icon name="plus"></esp-icon> Add Option
-      </esp-button>
-      <esp-button variant="secondary">
-        <esp-icon name="cancel"></esp-icon> Cancel
-      </esp-button>
-      <esp-button variant="danger">
-        <esp-icon name="trash"></esp-icon> Delete
-      </esp-button>
-      <esp-button variant="invisible">
-        <esp-icon name="plus"></esp-icon> Add Option
-      </esp-button>
-      <esp-button variant="outline">
-        <esp-icon name="edit"></esp-icon>
-        Delete
-      </esp-button>
-
+    <esp-card shape="rounded" variant="outline">
+      <h2 slot="header" class="section-header border-bottom-dashed">
+        EspCard Component
+      </h2>
       <p>
-        The `&lt;slot&gt;` in the Shadow DOM allows you to put any content
-        inside the custom element.
+        The <code>esp-card</code> component is a versatile container for
+        displaying content in a card format. It supports structured slots for
+        header, footer, and image, as well as various visual styles and
+        interactivity.
       </p>
+    </esp-card>
+    <section>
+      <h2>Card Component - Structured Slots</h2>
+      <div class="card-grid">
+        <esp-card>
+          <img
+            slot="image"
+            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+            alt="Placeholder Image"
+          />
+          <h3 slot="header" class="mb-0">Article Headline</h3>
+          <p>
+            This is the main body content of the card, providing more details
+            about the headline. It uses the default slot.
+          </p>
+          <div slot="footer">
+            <esp-button size="small" variant="outline">Read More</esp-button>
+            <esp-button size="small" variant="primary">Share</esp-button>
+          </div>
+        </esp-card>
+        <esp-card>
+          <h3 slot="header">Product Feature</h3>
+          <p>
+            Highlighting a key feature of a product with a concise description.
+            The footer has a single action.
+          </p>
+          <div slot="footer">
+            <esp-button size="small" variant="primary">Buy Now</esp-button>
+          </div>
+        </esp-card>
+        <esp-card>
+          <h3 slot="header">Event Reminder</h3>
+          <p>
+            Don't miss our upcoming webinar on web components! Join us next
+            Friday.
+          </p>
+          <p>
+            <small>May 31, 2025 - 2:00 PM IST</small>
+          </p>
+        </esp-card>
+        <esp-card>
+          <p>
+            This card only has main content, demonstrating flexibility without
+            header/image/footer.
+          </p>
+        </esp-card>
+      </div>
     </section>
 
     <section>
-      <h2>Icon-Only Buttons</h2>
-      <esp-button>
-        <esp-icon name="info" aria-label="Information"></esp-icon>
-      </esp-button>
-      <esp-button variant="secondary">
-        <esp-icon name="plus"></esp-icon>
-      </esp-button>
-      <esp-button variant="danger">
-        <esp-icon name="trash"></esp-icon>
-      </esp-button>
-      <esp-button variant="outline">
-        <esp-icon name="cancel"></esp-icon>
-      </esp-button>
-      <esp-button variant="invisible">
-        <esp-icon name="edit"></esp-icon>
-      </esp-button>
-      <esp-button size="small">
-        <esp-icon name="moon"></esp-icon>
-      </esp-button>
-      <esp-button size="large">
-        <esp-icon name="sun"></esp-icon>
-      </esp-button>
-      <esp-button>
-        <esp-icon name="edit"></esp-icon>
-      </esp-button>
+      <h2>Card Component - Visual Variants</h2>
+      <div class="card-grid">
+        <esp-card>
+          <h3 slot="header">Default Card</h3>
+          <p>This is the standard card with a subtle shadow and border.</p>
+        </esp-card>
+        <esp-card variant="outline">
+          <h3 slot="header">Outline Card</h3>
+          <p>
+            This variant emphasizes the border and has no box-shadow, useful for
+            secondary content.
+          </p>
+        </esp-card>
+        <esp-card variant="elevated">
+          <h3 slot="header">Elevated Card</h3>
+          <p>
+            This card stands out with a stronger shadow, giving it more visual
+            depth.
+          </p>
+        </esp-card>
+      </div>
     </section>
 
-    <script type="module" src="../src/components/esp-button.js"></script>
-    <script type="module" src="../src/components/esp-icon.js"></script>
+    <section>
+      <h2>Card Component - Clickable</h2>
+      <div class="card-grid">
+        <esp-card clickable>
+          <h3 slot="header">Clickable Card</h3>
+          <p>
+            This card is clickable! Hover over it to see the lift effect. It
+            also has accessibility attributes.
+          </p>
+          <div slot="footer">
+            <esp-button size="small" variant="invisible"
+              >View Details</esp-button
+            >
+          </div>
+        </esp-card>
+        <esp-card clickable variant="outline">
+          <h3 slot="header">Clickable Outline Card</h3>
+          <p>A clickable card with the outline variant.</p>
+        </esp-card>
+        <esp-card clickable variant="elevated">
+          <h3 slot="header">Clickable Elevated Card</h3>
+          <p>A clickable card with the elevated variant.</p>
+        </esp-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Card Component - Shapes</h2>
+      <div class="card-grid">
+        <esp-card>
+          <h3 slot="header">Square Card (Default)</h3>
+          <p>This card uses the default border-radius (`md`).</p>
+        </esp-card>
+        <esp-card shape="rounded">
+          <h3 slot="header">Rounded Card</h3>
+          <p>
+            This card has a larger border-radius (`lg`) for a more rounded look.
+          </p>
+        </esp-card>
+        <esp-card variant="outline" shape="rounded">
+          <h3 slot="header">Rounded Outline Card</h3>
+          <p>Combine variants and shapes for custom styles.</p>
+        </esp-card>
+        <esp-card clickable shape="rounded">
+          <h3 slot="header">Clickable Rounded Card</h3>
+          <p>This card is both clickable and rounded.</p>
+        </esp-card>
+      </div>
+    </section>
+    <script type="module" src="index.js"></script>
   </body>
 </html>

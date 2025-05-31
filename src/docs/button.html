@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EspButton & EspCard Component Showcase</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--esp-spacing-md);
+      }
+    </style>
+  </head>
+  <body data-theme="dark">
+    <h1 class="text-align-center">EspButton Component Showcase</h1>
+
+    <esp-card shape="rounded" variant="outline">
+      <h2 slot="header" class="section-header border-bottom-dashed">
+        Loading States
+      </h2>
+      <div>
+        <esp-button loading>Loading Primary</esp-button>
+        <esp-button loading variant="secondary">Loading Secondary</esp-button>
+        <esp-button loading variant="error">Loading Error</esp-button>
+        <esp-button loading variant="outline">Loading Outline</esp-button>
+        <esp-button loading variant="invisible">Loading Invisible</esp-button>
+        <esp-button loading size="small">Loading Small</esp-button>
+        <esp-button loading size="large">Loading Large</esp-button>
+      </div>
+    </esp-card>
+
+    <esp-card shape="rounded">
+      <h2 slot="header" class="section-header border-bottom-dashed">
+        Button Sizes
+      </h2>
+      <div>
+        <esp-button size="small">Small Button</esp-button>
+        <esp-button>Medium Button (Default)</esp-button>
+        <esp-button size="large">Large Button</esp-button>
+        <esp-button size="small" variant="outline">Small Outline</esp-button>
+        <esp-button variant="outline">Medium Outline</esp-button>
+        <esp-button size="large" variant="outline">Large Outline</esp-button>
+        <esp-button size="small" variant="invisible"
+          >Small Invisible</esp-button
+        >
+        <esp-button variant="invisible">Medium Invisible</esp-button>
+        <esp-button size="large" variant="invisible"
+          >Large Invisible</esp-button
+        >
+      </div>
+    </esp-card>
+    <section>
+      <h2>Default Button (now Primary style)</h2>
+      <esp-button>Default Button</esp-button>
+    </section>
+
+    <section>
+      <h2>Primary Buttons</h2>
+      <esp-button variant="primary">Primary Button</esp-button>
+      <esp-button variant="primary" disabled>Primary Disabled</esp-button>
+      <esp-button variant="primary" type="submit"
+        >Primary Submit (Needs JS)</esp-button
+      >
+    </section>
+
+    <section>
+      <h2>Secondary Buttons</h2>
+      <esp-button variant="secondary">Secondary Button</esp-button>
+      <esp-button variant="secondary" disabled>Secondary Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Error Buttons</h2>
+      <esp-button variant="error">Error Button</esp-button>
+      <esp-button variant="error" disabled>Error Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Outline Buttons</h2>
+      <esp-button variant="outline">Outline Button</esp-button>
+      <esp-button variant="outline" disabled>Outline Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Invisible Buttons</h2>
+      <esp-button variant="invisible">
+        <esp-icon name="plus"></esp-icon> Add Option
+      </esp-button>
+      <esp-button variant="invisible">Invisible Button</esp-button>
+      <esp-button variant="invisible" disabled>Invisible Disabled</esp-button>
+      <p>Hover over the invisible buttons to see a subtle background.</p>
+    </section>
+
+    <section>
+      <h2>Button with Icon and Text</h2>
+      <esp-button variant="primary">
+        <esp-icon name="plus"></esp-icon> Add Item
+      </esp-button>
+      <esp-button variant="secondary">
+        <esp-icon name="cancel"></esp-icon> Cancel
+      </esp-button>
+      <esp-button variant="error">
+        <esp-icon name="trash"></esp-icon> Delete
+      </esp-button>
+      <p>
+        The `&lt;slot&gt;` in the Shadow DOM allows you to put any content
+        inside the custom element. Now with `esp-icon` for better icon
+        management!
+      </p>
+    </section>
+
+    <section>
+      <h2>Icon-Only Buttons (with Shapes)</h2>
+      <h3>Default (Square)</h3>
+      <esp-button><esp-icon name="edit"></esp-icon></esp-button>
+      <esp-button variant="outline"
+        ><esp-icon name="trash"></esp-icon
+      ></esp-button>
+      <esp-button variant="invisible"
+        ><esp-icon name="plus"></esp-icon
+      ></esp-button>
+
+      <h3>Rounded Shape</h3>
+      <esp-button shape="rounded"><esp-icon name="edit"></esp-icon></esp-button>
+      <esp-button variant="outline" shape="rounded"
+        ><esp-icon name="trash"></esp-icon
+      ></esp-button>
+      <esp-button variant="invisible" shape="rounded"
+        ><esp-icon name="plus"></esp-icon
+      ></esp-button>
+      <esp-button size="small" variant="secondary" shape="rounded"
+        ><esp-icon name="cancel"></esp-icon
+      ></esp-button>
+      <esp-button size="large" variant="error" shape="rounded"
+        ><esp-icon name="trash"></esp-icon
+      ></esp-button>
+
+      <h3>Circle Shape</h3>
+      <esp-button shape="circle"><esp-icon name="edit"></esp-icon></esp-button>
+      <esp-button variant="outline" shape="circle"
+        ><esp-icon name="trash"></esp-icon
+      ></esp-button>
+      <esp-button variant="invisible" shape="circle"
+        ><esp-icon name="plus"></esp-icon
+      ></esp-button>
+      <esp-button size="small" variant="secondary" shape="circle"
+        ><esp-icon name="cancel"></esp-icon
+      ></esp-button>
+      <esp-button size="large" variant="error" shape="circle"
+        ><esp-icon name="trash"></esp-icon
+      ></esp-button>
+
+      <p>
+        These buttons automatically adjust their size, padding, and now
+        **shape** when they contain only an icon.
+      </p>
+    </section>
+
+    <script type="module" src="../index.js"></script>
+  </body>
+</html>
