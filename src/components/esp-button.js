@@ -87,17 +87,17 @@ export default class EspButton extends HTMLElement {
       border-color: var(--esp-color-secondary-dark);
     }
 
-    /* --- DANGER VARIANT --- */
-    :host([variant="danger"]) {
-      background-color: var(--esp-color-danger);
+    /* --- Error VARIANT --- */
+    :host([variant="error"]) {
+      background-color: var(--esp-color-error);
       color: var(--esp-color-white);
-      border-color: var(--esp-color-danger);
+      border-color: var(--esp-color-error);
     }
 
-    :host([variant="danger"]:hover:not([disabled]):not([loading])),
-    :host([variant="danger"]:focus-visible:not([disabled]):not([loading])) {
-      background-color: var(--esp-color-danger-dark);
-      border-color: var(--esp-color-danger-dark);
+    :host([variant="error"]:hover:not([disabled]):not([loading])),
+    :host([variant="error"]:focus-visible:not([disabled]):not([loading])) {
+      background-color: var(--esp-color-error-dark);
+      border-color: var(--esp-color-error-dark);
     }
 
     /* --- OUTLINE VARIANT --- */
@@ -143,9 +143,9 @@ export default class EspButton extends HTMLElement {
       color: var(--esp-color-white);
     }
 
-    :host([variant="danger"][disabled]) {
-      background-color: var(--esp-color-danger);
-      border-color: var(--esp-color-danger);
+    :host([variant="error"][disabled]) {
+      background-color: var(--esp-color-error);
+      border-color: var(--esp-color-error);
       color: var(--esp-color-white);
     }
 
@@ -253,6 +253,20 @@ export default class EspButton extends HTMLElement {
       padding: var(--esp-spacing-sm);
       min-width: calc(1.2em + var(--esp-spacing-sm) * 2);
       min-height: calc(1.2em + var(--esp-spacing-sm) * 2);
+    }
+
+    /* Rounded shape for all buttons */
+    :host([shape="rounded"]) {
+      border-radius: var(
+        --esp-border-radius-lg
+      ); /* Use a larger radius for a rounded look */
+    }
+
+    /* Circular shape for icon-only buttons */
+    :host([icon-only][shape="circle"]) {
+      border-radius: var(
+        --esp-border-radius-full
+      ); /* Use the full radius to make it a circle */
     }
   `;
 

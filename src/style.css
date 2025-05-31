@@ -5,8 +5,8 @@
   --esp-color-primary-dark: color-mix(in srgb, var(--esp-color-primary), #0d1117 20%);
   --esp-color-secondary: #6c757d;
   --esp-color-secondary-dark: color-mix(in srgb, var(--esp-color-secondary), #0d1117 20%);
-  --esp-color-danger: #d73a49;
-  --esp-color-danger-dark: color-mix(in srgb, var(--esp-color-danger), #0d1117 20%);
+  --esp-color-error: #d73a49;
+  --esp-color-error-dark: color-mix(in srgb, var(--esp-color-error), #0d1117 20%);
 
   --esp-color-text: #212529;
   --esp-color-text-disabled: #d1d5da;
@@ -87,9 +87,9 @@ body[data-theme="dark"] {
   /* Lighter grey for secondary elements on dark background */
   --esp-color-secondary-dark: color-mix(in srgb, var(--esp-color-secondary), var(--esp-color-background) 10%);
 
-  --esp-color-danger: #f85149;
+  --esp-color-error: #f85149;
   /* A slightly warmer red that stands out well on dark */
-  --esp-color-danger-dark: color-mix(in srgb, var(--esp-color-danger), var(--esp-color-background) 10%);
+  --esp-color-error-dark: color-mix(in srgb, var(--esp-color-error), var(--esp-color-background) 10%);
 
   --esp-color-border: #3a3a3a;
   /* Darker, subtle border */
@@ -116,9 +116,19 @@ body {
   font-weight: var(--esp-font-weight-semibold);
   line-height: var(--esp-line-height-base);
   margin: 0px;
-  padding: 15px;
+  padding: var(--esp-spacing-lg);
 }
 
 .p-2 {
   padding: 10px;
+}
+
+h1 {
+  color: var(--esp-color-text);
+  margin-bottom: var(--esp-spacing-lg);
+  text-align: center;
+}
+
+.text-align-center {
+  text-align: center;
 }
