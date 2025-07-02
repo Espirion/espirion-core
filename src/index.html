@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EspButton & EspCard Component Showcase</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="font-family: Inter, sans-serif; padding: 2rem">
+    <section>
+      <h2 slot="header" class="section-header border-bottom-dashed">
+        Loading States
+      </h2>
+      <div>
+        <esp-button loading>Loading Primary</esp-button>
+        <esp-button loading variant="secondary">Loading Secondary</esp-button>
+        <esp-button loading variant="error">Loading Error</esp-button>
+        <esp-button loading variant="success">Loading Success</esp-button>
+        <esp-button loading variant="ghost">Loading Ghost</esp-button>
+        <esp-button loading variant="link">Loading Link</esp-button>
+      </div>
+    </section>
+
+    <section>
+      <h2 slot="header" class="section-header border-bottom-dashed">
+        Button Sizes
+      </h2>
+      <div>
+        <esp-button size="small">Small Button</esp-button>
+        <esp-button>Medium Button (Default)</esp-button>
+        <esp-button size="large">Large Button</esp-button>
+      </div>
+    </section>
+    <section>
+      <h2>Default Button (now Primary style)</h2>
+      <esp-button>Default Button</esp-button>
+    </section>
+
+    <section>
+      <h2>Primary Buttons</h2>
+      <esp-button variant="primary">Primary Button</esp-button>
+      <esp-button variant="primary" disabled>Primary Disabled</esp-button>
+      <esp-button variant="primary" type="submit"
+        >Primary Submit (Needs JS)</esp-button
+      >
+    </section>
+
+    <section>
+      <h2>Secondary Buttons</h2>
+      <esp-button variant="secondary">Secondary Button</esp-button>
+      <esp-button variant="secondary" disabled>Secondary Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Error Buttons</h2>
+      <esp-button variant="error">Error Button</esp-button>
+      <esp-button variant="error" disabled>Error Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Outline Buttons</h2>
+      <esp-button variant="outline">Outline Button</esp-button>
+      <esp-button variant="outline" disabled>Outline Disabled</esp-button>
+    </section>
+
+    <section>
+      <h2>Ghost Buttons</h2>
+      <esp-button variant="ghost">
+        <esp-icon name="plus"></esp-icon> Add Option
+      </esp-button>
+      <esp-button variant="ghost">Ghost Button</esp-button>
+      <esp-button variant="ghost" disabled>Ghost Disabled</esp-button>
+      <p>Hover over the Ghost buttons to see a subtle background.</p>
+    </section>
+
+    <section>
+      <h2>Button with Icon and Text</h2>
+      <esp-button variant="primary">
+        <esp-icon name="plus"></esp-icon> Add Item
+      </esp-button>
+      <esp-button variant="secondary">
+        <esp-icon name="cancel"></esp-icon> Cancel
+      </esp-button>
+      <esp-button variant="error">
+        <esp-icon name="trash"></esp-icon> Delete
+      </esp-button>
+      <p>
+        The `&lt;slot&gt;` in the Shadow DOM allows you to put any content
+        inside the custom element. Now with `esp-icon` for better icon
+        management!
+      </p>
+    </section>
+
+    <section class="esp-button">
+      <h1>EspButton Component Showcase</h1>
+      <p>
+        This page demonstrates the <code>esp-button</code> component with
+        various attributes and styles.
+      </p>
+      <esp-button variant="primary" size="medium">Submit</esp-button>
+      <esp-button variant="primary" disabled size="medium">Disabled</esp-button>
+      <esp-button variant="secondary" size="small">Cancel</esp-button>
+      <esp-button variant="success">Success</esp-button>
+      <esp-button variant="error" size="large">Error</esp-button>
+      <esp-button variant="error" size="large" loading>Error</esp-button>
+      <esp-button variant="ghost" size="large">Delete</esp-button>
+      <esp-button variant="link" size="large">Delete</esp-button>
+    </section>
+
+    <script type="module" src="esp-core.js"></script>
+  </body>
+</html>
